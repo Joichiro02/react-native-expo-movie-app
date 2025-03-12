@@ -3,6 +3,7 @@ import SearchBar from "@/components/SearchBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchMovies } from "@/services/api";
+import { updateSearchCount } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
@@ -24,9 +25,9 @@ export default function Search() {
 				await loadMovies();
 
 				// Call updateSearchCount only if there are results
-				// if (movies?.length! > 0 && movies?.[0]) {
-				//   await updateSearchCount(searchQuery, movies[0]);
-				// }
+				if (movies?.length! > 0 && movies?.[0]) {
+					await updateSearchCount(searchQuery, movies[0]);
+				}
 			} else {
 				reset();
 			}
